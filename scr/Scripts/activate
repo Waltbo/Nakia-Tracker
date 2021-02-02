@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\waltb\PycharmProjects\flaskProject\scr"
+VIRTUAL_ENV="C:\Users\waltb\PycharmProjects\Nakia-Tracker\scr"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
