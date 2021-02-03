@@ -1,23 +1,27 @@
 import json
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
-from flask import Flask
-PATH = "drivers/chromedriver.exe"
-driver = webdriver.Chrome(PATH)
+from riotwatcher import LolWatcher, ApiError
+from flask import Flask,render_template
 
-driver.get("https://na.op.gg/summoner/userName=NewtMo")
+
 app = Flask(__name__)
+
+# golbal variables
+api_key = 'RGAPI-457ce921-196c-4880-b44c-4845e0a5c5b0'
+watcher = LolWatcher(api_key)
+my_region = 'na1'
+me = watcher.summoner.by_name(my_region, 'NewtMo')
+my_ranked_stats = watcher.league.by_summoner(my_region, me['id'])
 
 
 @app.route('/')
 def hello_world():
-    rank = driver.find_element_by_class_name("TierRank").text
-    lp = driver.find_element_by_class_name("LeaguePoints").text
-    wins = driver.find_element_by_class_name("wins").text
-    loss = driver.find_element_by_class_name("losses").text
-    return rank
+    tier = my_ranked_stats[0]['tier']
+    rank = my_ranked_stats[0]['rank']
+    lp = my_ranked_stats[0]['leaguePoints']
+    wins = my_ranked_stats[0]['wins']
+    losses = my_ranked_stats[0]['losses']
+    print(my_ranked_stats)
+    return tier+" "+rank+"|"+str(lp)+" wins:"+str(wins)+" losses:"+str(losses)
 
 
 if __name__ == '__main__':

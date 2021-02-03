@@ -1,17 +1,14 @@
-import json
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
+from riotwatcher import LolWatcher, ApiError
+# golbal variables
+api_key = 'RGAPI-457ce921-196c-4880-b44c-4845e0a5c5b0'
+watcher = LolWatcher(api_key)
+my_region = 'na1'
+me = watcher.summoner.by_name(my_region, 'NewtMo')
+my_ranked_stats = watcher.league.by_summoner(my_region, me['id'])
 
-PATH = "drivers/chromedriver.exe"
-driver = webdriver.Chrome(PATH)
-
-driver.get("https://na.op.gg/summoner/userName=NewtMo")
-
-rank = driver.find_element_by_class_name("TierRank").text
-lp = driver.find_element_by_class_name("LeaguePoints").text
-wins = driver.find_element_by_class_name("wins").text
-loss = driver.find_element_by_class_name("losses").text
-print(rank,lp,wins,loss)
-
+tier = my_ranked_stats[0]['tier']
+rank = my_ranked_stats[0]['rank']
+lp = my_ranked_stats[0]['leaguePoints']
+wins = my_ranked_stats[0]['wins']
+losses = my_ranked_stats[0]['losses']
+print(my_ranked_stats)

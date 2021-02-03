@@ -18,3 +18,5 @@ soupsieve==2.1
 urllib3==1.26.3
 webdriver-manager==3.3.0
 Werkzeug==1.0.1
+
+leagueoflegends~=1.4
