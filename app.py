@@ -24,7 +24,7 @@ def hello_world():
     wins = my_ranked_stats[0]['wins']
     losses = my_ranked_stats[0]['losses']
     print(my_ranked_stats)
-    return tier+" "+rank+"|"+str(lp)+" wins:"+str(wins)+" losses:"+str(losses)
+    return "His rank is "+ tier+" "+rank+" League Points Are"+str(lp)+" wins:"+str(wins)+" losses:"+str(losses)
 
 
 if __name__ == '__main__':
