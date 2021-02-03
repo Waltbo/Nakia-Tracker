@@ -1,4 +1,6 @@
 import json
+import os
+
 from riotwatcher import LolWatcher, ApiError
 from flask import Flask,render_template
 
@@ -6,7 +8,8 @@ from flask import Flask,render_template
 app = Flask(__name__)
 
 # golbal variables
-api_key = 'RGAPI-457ce921-196c-4880-b44c-4845e0a5c5b0'
+
+api_key = os.getenv('api')
 watcher = LolWatcher(api_key)
 my_region = 'na1'
 me = watcher.summoner.by_name(my_region, 'NewtMo')
